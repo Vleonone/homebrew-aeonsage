@@ -3,25 +3,46 @@ class Aeonsage < Formula
   homepage "https://aeonsage.org"
   license "MIT"
   
+  # Version tracking
+  version "2026.1.26"
+  
   # Install via npm - works cross-platform
   depends_on "node@22"
   
   def install
+    # Create libexec structure
+    libexec.mkpath
+    
+    # Install via npm
     system "npm", "install", "-g", "aeonsage@#{version}", "--prefix", libexec
+    
+    # Link binaries
     bin.install_symlink Dir["#{libexec}/bin/*"]
+    
+    # Create config directory
+    (var/"aeonsage").mkpath
+  end
+
+  def post_install
+    # Verify installation
+    system "#{bin}/aeonsage", "--version"
   end
 
   def caveats
     <<~EOS
-      AeonSage has been installed!
+      ========================================
+        AeonSage has been installed!
+      ========================================
       
-      Quick start:
+      Quick Start:
         aeonsage onboard --install-daemon
         aeonsage gateway
       
       Web UI: http://localhost:18789
       
       Documentation: https://docs.aeonsage.org
+      
+      Config directory: #{var}/aeonsage
     EOS
   end
 
