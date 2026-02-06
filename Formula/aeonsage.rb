@@ -4,7 +4,7 @@ class Aeonsage < Formula
   license "MIT"
   
   # Version tracking
-  version "2026.1.26"
+  version "2026.1.27"
   
   # Install via npm - works cross-platform
   depends_on "node@22"
@@ -38,7 +38,7 @@ class Aeonsage < Formula
         aeonsage onboard --install-daemon
         aeonsage gateway
       
-      Web UI: http://localhost:18789
+      Web UI: http://127.0.0.1:18789/
       
       Documentation: https://docs.aeonsage.org
       
